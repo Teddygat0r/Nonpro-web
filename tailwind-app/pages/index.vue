@@ -1,8 +1,11 @@
 <template>
-    <main class="flex flex-col">
-        <div class="flex justify-center pt-8">
+    <main class="flex flex-col overflow-x-hidden">
+        <section
+            id="hero"
+            class="flex h-full flex-col justify-center pt-8 md:flex-row"
+        >
             <div
-                class="my-auto flex w-[50%] flex-col justify-center gap-8 pb-[6%] pt-[5%] align-middle"
+                class="animate-fade-in my-auto flex flex-col justify-center gap-8 pb-[6%] pt-[5%] align-middle opacity-0 md:w-[50%]"
             >
                 <div class="mx-auto">
                     <h1
@@ -17,33 +20,36 @@
                         Time
                     </h1>
                 </div>
-                <div class="m-auto flex gap-8">
+                <div class="buttons-fade-in-animation m-auto flex gap-8">
                     <button
                         class="text-white-300 rounded-md border-2 border-white px-8 py-3 font-bold transition duration-300 hover:border-sky-300 hover:text-sky-300"
                     >
-                        Contact Me
+                        Contact Us
                     </button>
                     <button
                         class="text-white-300 rounded-md bg-sky-500 px-8 py-3 font-bold transition duration-300 hover:bg-sky-600"
                     >
-                        Contact Me
+                        Join Us
                     </button>
                 </div>
             </div>
-            <div class="flex w-[50%] flex-col justify-center text-center">
-                <div class="relative h-[100%] rounded-l-3xl bg-green-300">
+            <div
+                class="animate-enter-from-right flex transform flex-col justify-center text-center duration-1000 md:w-[50%] md:translate-x-full"
+            >
+                <div class="bg-waves-svg relative h-[100%] md:rounded-l-3xl">
                     <div
-                        class="absolute left-[40%] top-[10%] flex h-[80%] w-[400px] rounded-xl bg-gray-700"
+                        class="left-[40%] top-[10%] m-8 flex h-[80%] rounded-xl bg-gray-700 md:absolute md:m-0 md:w-[400px]"
                     >
                         <code
-                            class="relative m-auto inline-block whitespace-pre-wrap text-start"
+                            class="relative m-auto inline-block whitespace-pre-wrap p-4 text-start md:p-0"
                             v-html="heroCode"
                         >
                         </code>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
+        <Branding></Branding>
     </main>
 </template>
 
@@ -65,5 +71,63 @@ const heroCode = `<span class="text-gray-400">&lt;</span><span class="text-pink-
 <style scoped>
 .line-height-increase {
     line-height: 1.125;
+}
+
+@keyframes enter-from-right {
+    0% {
+        transform: translateX(100%);
+        opacity: 0.5;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.animate-enter-from-right {
+    animation-name: enter-from-right;
+    animation-duration: 3s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.animate-fade-in {
+    animation-name: fade-in;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes buttons-fade-in {
+    0% {
+        opacity: 0;
+        transform: translateY(-50%);
+    }
+    33% {
+        opacity: 0;
+        transform: translateY(-50%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0%);
+    }
+}
+
+.buttons-fade-in-animation {
+    animation-name: buttons-fade-in;
+    animation-duration: 3s;
+    animation-fill-mode: forwards;
+}
+
+.bg-waves-svg {
+    background-image: url("/images/wavy_green_bg.svg");
+    background-size: cover;
 }
 </style>
